@@ -16,5 +16,16 @@ namespace Chat_Application_Client
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void signin_Click(object sender, EventArgs e)
+        {
+            Program.SignIn(username.Text, password.Text);
+
+        }
     }
 }

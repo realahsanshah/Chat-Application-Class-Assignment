@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace Chat_System_Server
 {
     public class Program
     {
+        public static string signUp = "SIGNUP";
+        public static string signIn = "SIGNIN";
         public static TcpListener tcpListener;
 
         public static void Main(string[] args)
@@ -18,20 +23,40 @@ namespace Chat_System_Server
             while (true)
             {
                 Socket socket = tcpListener.AcceptSocket();
+                Console.WriteLine("Connected");
+                HandleUser(socket);
+               
+            }
 
-                Byte[] byteMessage=new Byte[250];
-                int res=socket.Receive(byteMessage);
+         
+
+        }
+
+        public static void HandleUser(Socket socket)
+        {
+            string instructions="";
+            string actionType,message;
+            while (true)
+            {
+                
+                byte[] byteMessage = new byte[1500];
+                
+                
+                int res = socket.Receive(byteMessage);
 
                 for (int i = 0; i <= res; i++)
                 {
                     // Print each character to the console window
-                    Console.Write(Convert.ToChar(byteMessage[i]));
+                    instructions+=Convert.ToChar(byteMessage[i]);
                 }
-
-                Console.WriteLine(byteMessage.ToString());
-            }
-
-         
+                //actionType = instructions.Split(':')[0];
+                //message = instructions.Split(':')[1];
+                //Console.WriteLine($"ActionType: {actionType}");
+                //Console.WriteLine($"Message: {message}");
+                Console.WriteLine(instructions);
+                byte[] sendMessage =Encoding.ASCII.GetBytes("Received");
+                socket.Send(sendMessage);
+        }
 
         }
 
