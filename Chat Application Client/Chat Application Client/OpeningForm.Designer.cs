@@ -42,6 +42,7 @@
             this.signInBtn.TabIndex = 0;
             this.signInBtn.Text = "Sign In";
             this.signInBtn.UseVisualStyleBackColor = true;
+            this.signInBtn.Click += new System.EventHandler(this.signInBtn_Click);
             // 
             // signUpBtn
             // 
@@ -52,6 +53,7 @@
             this.signUpBtn.TabIndex = 1;
             this.signUpBtn.Text = "Sign Up";
             this.signUpBtn.UseVisualStyleBackColor = true;
+            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // welcomeMsg
             // 

@@ -21,5 +21,19 @@ namespace Chat_Application_Client
         {
             
         }
+
+        private void signInBtn_Click(object sender, EventArgs e)
+        {
+            SignIn signIn = new SignIn();
+            Program.SwitchWindows(signIn, this, Form1.ActiveForm);
+
+          
+        }
+
+        private void signUpBtn_Click(object sender, EventArgs e)
+        {
+            SignUp signUp = new SignUp();
+            Program.SwitchWindows(signUp, this, Form1.ActiveForm);
+        }
     }
 }
