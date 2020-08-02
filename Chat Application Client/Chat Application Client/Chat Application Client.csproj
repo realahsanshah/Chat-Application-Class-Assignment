@@ -52,6 +52,12 @@
     <Compile Include="Chat User Interface.Designer.cs">
       <DependentUpon>Chat User Interface.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="OpeningForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <EmbeddedResource Include="Chat User Interface.resx">
       <DependentUpon>Chat User Interface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OpeningForm.resx">
       <DependentUpon>OpeningForm.cs</DependentUpon>

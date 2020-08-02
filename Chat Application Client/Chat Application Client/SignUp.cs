@@ -25,7 +25,38 @@ namespace Chat_Application_Client
 
         private void signUpBtn_Click(object sender, EventArgs e)
         {
+            if (usernameError.Visible)
+            {
+                MessageBox.Show("Username not available", "Error");
+                return;
+            }
 
+            if(usernameText.Text==""|| 
+                nameText.Text == "" || 
+                passwordText.Text == "" || 
+                emailText.Text == "" )
+            {
+                MessageBox.Show("Fill all the values", "Error");
+                return;
+            }
+
+            Program.SignUp(usernameText.Text, passwordText.Text, nameText.Text, emailText.Text);
+        }
+
+        private void usernameText_Leave(object sender, EventArgs e)
+        {
+            Console.WriteLine("Inside Leave");
+            if (usernameText.Text == "")
+                return;
+
+            if (Program.CheckUsernameAvailable(usernameText.Text))
+            {
+                usernameError.Visible = false;
+            }
+            else
+            {
+                usernameError.Visible = true;
+            }
         }
     }
 }

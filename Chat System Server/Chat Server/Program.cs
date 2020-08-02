@@ -17,6 +17,7 @@ namespace Chat_Server
         public const string sendMessageAction = "SENDMESSAGE";
         public static TcpListener tcpListener;
         public static Socket socket;
+        public static Chat_ApplicationEntities db;
 
         public static void Main(string[] args)
         {
@@ -24,7 +25,7 @@ namespace Chat_Server
             tcpListener.Start();
             Console.WriteLine("Server listening on " + tcpListener.LocalEndpoint);
 
-
+            db=new Chat_ApplicationEntities();
             while (true)
             {
                 socket= tcpListener.AcceptSocket();
@@ -50,7 +51,10 @@ namespace Chat_Server
                 int res = socket.Receive(byteMessage);
 
 
-                instructions = Encoding.ASCII.GetString(byteMessage);
+                for (int i = 0; i < res; i++)
+                {
+                    instructions += Convert.ToChar(byteMessage[i]);
+                }
 
 
                 actionType = instructions.Split(':')[0];
@@ -80,6 +84,11 @@ namespace Chat_Server
 
         public static void HandleAction(string actionType,string message)
         {
+            string username;
+            string password;
+            string name;
+            string email;
+            User user;
             byte[] sendMessage;
             switch (actionType)
             {
@@ -92,15 +101,39 @@ namespace Chat_Server
 
                 case signUp:
                     Console.WriteLine($"ActionType: {actionType}");
-                    Console.WriteLine($"Message: {message}");
+                    string[] values = message.Split(',');
+                    username=values[0];
+                    password = values[1];
+                    name = values[2];
+                    email = values[3];
+
+                    user = new User();
+                    user.email = email;
+                    user.name = name;
+                    user.password = password;
+                    user.username = username;
+                    db.Users.Add(user);
+                    int result = db.SaveChanges();
+                    
                     sendMessage = Encoding.ASCII.GetBytes("Sign Up Request Received");
                     socket.Send(sendMessage);
                     break;
 
                 case checkUsername:
                     Console.WriteLine($"ActionType: {actionType}");
-                    Console.WriteLine($"Message: {message}");
-                    sendMessage = Encoding.ASCII.GetBytes("Check Username Request Received");
+
+                    username = message;
+                    bool isAvailable = !db.Users.Any(x => x.username.Equals(username));
+                    Console.WriteLine(isAvailable);
+                    if (isAvailable)
+                    {
+                        sendMessage = Encoding.ASCII.GetBytes("true");
+                    }
+                    else
+                    {
+                        sendMessage = Encoding.ASCII.GetBytes("false");
+                    }
+                    
                     socket.Send(sendMessage);
                     break;
 

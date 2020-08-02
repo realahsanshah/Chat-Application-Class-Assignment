@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.usernameText = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.usernameError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cancelBtn
@@ -136,6 +137,7 @@
             this.usernameText.Name = "usernameText";
             this.usernameText.Size = new System.Drawing.Size(174, 30);
             this.usernameText.TabIndex = 15;
+            this.usernameText.Leave += new System.EventHandler(this.usernameText_Leave);
             // 
             // label5
             // 
@@ -147,6 +149,17 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Username";
             // 
+            // usernameError
+            // 
+            this.usernameError.AutoSize = true;
+            this.usernameError.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameError.Location = new System.Drawing.Point(539, 185);
+            this.usernameError.Name = "usernameError";
+            this.usernameError.Size = new System.Drawing.Size(190, 23);
+            this.usernameError.TabIndex = 18;
+            this.usernameError.Text = "Username not available";
+            this.usernameError.Visible = false;
+            // 
             // SignUp
             // 
             this.AcceptButton = this.signUpBtn;
@@ -154,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelBtn;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.usernameError);
             this.Controls.Add(this.passwordText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.usernameText);
@@ -185,5 +199,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox usernameText;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label usernameError;
     }
 }

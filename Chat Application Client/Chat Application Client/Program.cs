@@ -13,6 +13,9 @@ namespace Chat_Application_Client
     {
         public static string signUp = "SIGNUP";
         public static string signIn = "SIGNIN";
+        public const string checkUsername = "CHECKUSERNAME";
+        public const string addFriend = "ADDFRIEND";
+        public const string sendMessageAction = "SENDMESSAGE";
         public static IPEndPoint endPoint;
         public static Socket socket;
 
@@ -23,20 +26,20 @@ namespace Chat_Application_Client
         [STAThread]
         public static void Main()
         {
-            //string serverIp = "192.168.0.104";
-            //int serverPort = 2048;
-            //try
-            //{
-            //    endPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
+            string serverIp = "192.168.0.104";
+            int serverPort = 2048;
+            try
+            {
+                endPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
 
-            //    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            //    socket.Connect(endPoint);
-            //}
-            //catch(Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
+                socket.Connect(endPoint);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
 
@@ -83,6 +86,33 @@ namespace Chat_Application_Client
             else
             {
                 MessageBox.Show(rMessage, "Unsuccessful");
+            }
+        }
+
+        public static bool CheckUsernameAvailable(string username)
+        {
+            string message = string.Format($"{checkUsername}:{username}");
+            Console.WriteLine(message);
+            string rMessage = "";
+            byte[] receiveMessage = new byte[1500];
+            byte[] sendMessage = Encoding.ASCII.GetBytes(message);
+            socket.SendTo(sendMessage, endPoint);
+            int size = socket.Receive(receiveMessage);
+
+            for(int i = 0; i < size; i++)
+            {
+                rMessage += Convert.ToChar(receiveMessage[i]);
+            }
+
+            Console.WriteLine(rMessage);
+
+            if (rMessage.Equals("true"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
