@@ -62,6 +62,30 @@ namespace Chat_Application_Client
             MessageBox.Show(rMessage);
         }
 
+        public static void SignUp(string username, string password,string name,string email)
+        {
+            string message = string.Format($"{signUp}:{username},{password},{name},{email}");
+            Console.WriteLine(message);
+            string rMessage = "";
+            byte[] receiveMessage = new byte[1500];
+            byte[] sendMessage = Encoding.ASCII.GetBytes(message);
+            socket.SendTo(sendMessage, endPoint);
+            int size = socket.Receive(receiveMessage);
+
+
+            rMessage = Encoding.ASCII.GetString(receiveMessage);
+
+
+            if (rMessage.Equals("true"))
+            {
+                MessageBox.Show(rMessage,"Success");
+            }
+            else
+            {
+                MessageBox.Show(rMessage, "Unsuccessful");
+            }
+        }
+
         public static void SwitchWindows(Form openingWindow, Form closingWindow, Form MDI)
         {
             closingWindow.Close();
