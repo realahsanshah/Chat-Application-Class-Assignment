@@ -23,20 +23,20 @@ namespace Chat_Application_Client
         [STAThread]
         public static void Main()
         {
-            string serverIp = "192.168.0.104";
-            int serverPort = 2048;
-            try
-            {
-                endPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
+            //string serverIp = "192.168.0.104";
+            //int serverPort = 2048;
+            //try
+            //{
+            //    endPoint = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
 
-                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                socket.Connect(endPoint);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //    socket.Connect(endPoint);
+            //}
+            //catch(Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
 
 
@@ -54,12 +54,21 @@ namespace Chat_Application_Client
             byte[] sendMessage = Encoding.ASCII.GetBytes(message);
             socket.SendTo(sendMessage, endPoint);
             int size = socket.Receive(receiveMessage);
-            for(int i = 0; i < size; i++)
-            {
-                rMessage+=Convert.ToChar(receiveMessage[i]);
-            }
+
+
+            rMessage = Encoding.ASCII.GetString(receiveMessage);
+
 
             MessageBox.Show(rMessage);
+        }
+
+        public static void SwitchWindows(Form openingWindow, Form closingWindow, Form MDI)
+        {
+            closingWindow.Close();
+
+            openingWindow.WindowState = FormWindowState.Maximized;
+            openingWindow.MdiParent = MDI;
+            openingWindow.Show();
         }
 
 

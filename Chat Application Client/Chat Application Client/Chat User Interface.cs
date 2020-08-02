@@ -12,19 +12,19 @@ namespace Chat_Application_Client
 {
     public partial class Form1 : Form
     {
+        OpeningForm openingForm;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+    
 
-        }
-
-        private void signin_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Program.SignIn(username.Text, password.Text);
+            openingForm = new OpeningForm();
+            openingForm.MdiParent = this;
+            openingForm.Show();
 
         }
     }

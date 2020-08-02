@@ -52,10 +52,19 @@
     <Compile Include="Chat User Interface.Designer.cs">
       <DependentUpon>Chat User Interface.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpeningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpeningForm.Designer.cs">
+      <DependentUpon>OpeningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Chat User Interface.resx">
       <DependentUpon>Chat User Interface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpeningForm.resx">
+      <DependentUpon>OpeningForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

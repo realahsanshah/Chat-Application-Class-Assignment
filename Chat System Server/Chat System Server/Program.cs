@@ -44,16 +44,14 @@ namespace Chat_System_Server
                 
                 int res = socket.Receive(byteMessage);
 
-                for (int i = 0; i <= res; i++)
-                {
-                    // Print each character to the console window
-                    instructions+=Convert.ToChar(byteMessage[i]);
-                }
-                //actionType = instructions.Split(':')[0];
-                //message = instructions.Split(':')[1];
-                //Console.WriteLine($"ActionType: {actionType}");
-                //Console.WriteLine($"Message: {message}");
-                Console.WriteLine(instructions);
+
+                instructions = Encoding.ASCII.GetString(byteMessage);
+
+
+                actionType = instructions.Split(':')[0];
+                message = instructions.Split(':')[1];
+                Console.WriteLine($"ActionType: {actionType}");
+                Console.WriteLine($"Message: {message}");
                 byte[] sendMessage =Encoding.ASCII.GetBytes("Received");
                 socket.Send(sendMessage);
         }
