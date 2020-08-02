@@ -62,6 +62,7 @@
             this.signUpBtn.TabIndex = 12;
             this.signUpBtn.Text = "Sign Up";
             this.signUpBtn.UseVisualStyleBackColor = true;
+            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // emailText
             // 

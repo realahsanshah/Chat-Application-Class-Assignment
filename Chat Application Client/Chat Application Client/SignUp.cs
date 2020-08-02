@@ -22,5 +22,10 @@ namespace Chat_Application_Client
             OpeningForm openingForm = new OpeningForm();
             Program.SwitchWindows(openingForm, this, Form1.ActiveForm);
         }
+
+        private void signUpBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
